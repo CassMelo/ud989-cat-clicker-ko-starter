@@ -5,16 +5,19 @@
     <title>Cat Clicker</title>
 </head>
 <body>
-    <ul id="cat-list"></ul>
-    <div id="cat">
+    <ul data-bind="foreach: catList">
+        <li data-bind = "text: name, click: $parent.changeCurrentCat"> </li>
+    </ul>
 
-        <h2 data-bind = "text: currentCat().name"></h2>
-        <div data-bind = "text: currentCat().clickCount"></div>
-        <div data-bind = "text: currentCat().title"></div>
-        <img src="" alt="cute cat" data-bind = "click: incrementCounter, attr: {src: currentCat().imgSrc}">
+    <div id="cat" data-bind="with: currentCat()">
+
+        <h2 data-bind = "text: name"></h2>
+        <div data-bind = "text: clickCount"></div>
+        <div data-bind = "text: title"></div>
+        <img src="" alt="cute cat" data-bind = "click: $parent.incrementCounter, attr: {src: imgSrc}">
         <div>
             <h3> Nicknames: </h3>
-            <ul data-bind="foreach: currentCat().nicknames">
+            <ul data-bind="foreach: nicknames">
                 <!--  used the $data because needs to get the actual data in the array that we're leaping over. This is great for simple things like nicknames, months, lottery numbers. In this case the data is simple, just an array or a number. If your array has an object you would write the name of the property you wanted  -->
                 <li data-bind="text: $data"> </li>
             </ul>
